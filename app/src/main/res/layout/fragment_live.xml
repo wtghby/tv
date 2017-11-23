@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.conny.library.pulltorefresh.pulltorefresh.PullToRefreshGridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/px20"
+        android:layout_marginRight="@dimen/px20"
+        android:layout_marginTop="@dimen/px20"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" />
+</FrameLayout>

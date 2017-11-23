@@ -6,10 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.conny.tv.R;
 import com.conny.tv.material.dialog.ProgressDialog;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -19,6 +22,13 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    @BindView(R.id.title_bar)
+    View mTitleBar;
+    @BindView(R.id.title_view)
+    TextView mTitle;
+    @BindView(R.id.left_view)
+    ImageView mLeft;
 
     private FrameLayout mContent;
     private Unbinder mBinder;
@@ -42,6 +52,20 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void addView(int layoutId) {
         View view = LayoutInflater.from(this).inflate(layoutId, null);
         mContent.addView(view);
+    }
+
+    protected void setTitleTxt(String title) {
+        mTitle.setText(title);
+    }
+
+    protected void setTitleTxt(int resId) {
+        if (resId > 0) {
+            mTitle.setText(resId);
+        }
+    }
+
+    protected void setLeftImage(int resId) {
+        mLeft.setImageResource(resId);
     }
 
     @Override
