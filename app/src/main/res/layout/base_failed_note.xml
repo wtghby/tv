@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_grey_bg_color"
+    android:orientation="vertical"
+    android:visibility="gone" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/px18"
+        android:layout_marginTop="@dimen/px200"
+        android:scaleType="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/base_load_failed_title"
+        android:textColor="@color/common_big_title_text"
+        android:textSize="@dimen/font_38px" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/px40"
+        android:layout_marginTop="@dimen/px48"
+        android:gravity="left"
+        android:lineSpacingExtra="@dimen/px12"
+        android:text="@string/base_load_failed_des"
+        android:textColor="@color/common_small_des_text"
+        android:textSize="@dimen/font_30px" />
+
+    <TextView
+        android:id="@+id/failed_reflesh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/px12"
+        android:drawablePadding="@dimen/px4"
+        android:gravity="center_vertical"
+        android:text="@string/failed_content"
+        android:textColor="#2882dc"
+        android:textSize="@dimen/font_30px" />
+
+</LinearLayout>

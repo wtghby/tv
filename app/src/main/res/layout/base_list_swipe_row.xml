@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_grey_selector" >
+
+    <LinearLayout
+        android:id="@+id/swipe_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="back" >
+
+        <View
+            android:id="@+id/space"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="@dimen/px140"
+            android:layout_height="match_parent"
+            android:background="@drawable/red_bg_selector"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/delete"
+            android:textColor="@color/black_565656"
+            android:textSize="@dimen/px30" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/swipe_front"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_grey_selector"
+        android:orientation="horizontal"
+        android:tag="front" >
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/checkarea"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <View
+                android:id="@+id/top_divider"
+                style="@style/divider_horizontal"
+                android:layout_width="match_parent"
+                android:visibility="gone" >
+            </View>
+
+            <ImageView
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="0dip"
+                android:layout_marginLeft="@dimen/px26"
+                android:layout_marginRight="@dimen/px26"
+                android:layout_weight="1" >
+            </ImageView>
+
+            <View
+                android:id="@+id/bottom_divider"
+                style="@style/divider_horizontal"
+                android:layout_width="match_parent"
+                android:visibility="gone" >
+            </View>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

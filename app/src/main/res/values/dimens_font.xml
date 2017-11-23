@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="font_18px">9.0sp</dimen>
+    <dimen name="font_20px">10.0sp</dimen>
+    <dimen name="font_22px">11.0sp</dimen>
+    <dimen name="font_24px">12.0sp</dimen>
+    <dimen name="font_26px">13.0sp</dimen>
+    <dimen name="font_28px">14.0sp</dimen>
+    <dimen name="font_30px">15.0sp</dimen>
+    <dimen name="font_32px">16.0sp</dimen>
+    <dimen name="font_34px">17.0sp</dimen>
+    <dimen name="font_36px">18.0sp</dimen>
+    <dimen name="font_38px">19.0sp</dimen>
+    <dimen name="font_40px">20.0sp</dimen>
+    <dimen name="font_48px">24.0sp</dimen>
+    <dimen name="font_50px">25.0sp</dimen>
+
+</resources>
