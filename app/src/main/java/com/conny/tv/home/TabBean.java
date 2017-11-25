@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 
 public class TabBean implements Serializable {
+    public int id;
     public String name;
     public int type;
 }

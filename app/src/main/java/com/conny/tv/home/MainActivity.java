@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide;
 import com.conny.library.lazy.LazyViewPager;
 import com.conny.library.slidingmenu.lib.SlidingMenu;
 import com.conny.tv.R;
+import com.conny.tv.api.callback.ApiCallback;
+import com.conny.tv.bean.ResultBean;
 import com.conny.tv.material.base.BaseActivity;
 import com.conny.tv.material.view.HorizontalListView;
 import com.conny.tv.test.LazyFragment;
@@ -21,6 +23,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
 
@@ -28,6 +33,9 @@ public class MainActivity extends BaseActivity {
     HorizontalListView mTab;
     @BindView(R.id.pager)
     LazyViewPager mPager;
+
+    private TabAdapter mAdapter;
+    private List<TabBean> mTabs;
 
     private SlidingMenu menu;
     private final String PIC = "http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg";
@@ -43,71 +51,81 @@ public class MainActivity extends BaseActivity {
         setTitleTxt("首页");
         setLeftImage(R.mipmap.ic_person);
         initTab();
+//
+//        Fragment f1 = new LiveFragment();
+//        Fragment f2 = new LiveFragment();
+//
+//        List<Fragment> fragments = new ArrayList<>();
+//        fragments.add(f1);
+//        fragments.add(f2);
 
-        Fragment f1 = new LiveFragment();
-        Fragment f2 = new LiveFragment();
-
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(f1);
-        fragments.add(f2);
-
-        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
-        mPager.setAdapter(adapter);
-    }
-
-    class FragmentAdapter extends FragmentPagerAdapter {
-
-        private List<Fragment> fragments;
-
-        public FragmentAdapter(FragmentManager fm, List<Fragment> fs) {
-            super(fm);
-            fragments = fs;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments == null ? null : fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments == null ? 0 : fragments.size();
-        }
     }
 
     private void initTab() {
-        TabBean t1 = new TabBean();
-        t1.name = "热门";
-        TabBean t2 = new TabBean();
-        t2.name = "精选";
-        TabBean t3 = new TabBean();
-        t3.name = "央视";
-        TabBean t4 = new TabBean();
-        t4.name = "卫视";
-        TabBean t5 = new TabBean();
-        t5.name = "收藏";
-        TabBean t6 = new TabBean();
-        t6.name = "直播";
-        TabBean t7 = new TabBean();
-        t7.name = "电影";
+        showProgress(false);
+        LiveApi.listTab(new ApiCallback<TabBean>() {
 
-        List<TabBean> tabBeans = new ArrayList<>();
-        tabBeans.add(t1);
-        tabBeans.add(t2);
-        tabBeans.add(t3);
-        tabBeans.add(t4);
-        tabBeans.add(t5);
-        tabBeans.add(t6);
-        tabBeans.add(t7);
-
-        final TabAdapter adapter = new TabAdapter(this, tabBeans);
-        mTab.setAdapter(adapter);
-        mTab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapter.selectItem(position);
+            public void onResponse(Call<ResultBean<TabBean>> call, Response<ResultBean<TabBean>> response) {
+                closeProgress();
+                if (response != null) {
+                    ResultBean<TabBean> result = response.body();
+                    if (result != null && result.errorCode == 0) {
+                        mTabs = result.rows;
+                        mAdapter = new TabAdapter(MainActivity.this, mTabs);
+                        mTab.setAdapter(mAdapter);
+                        mTab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                mAdapter.selectItem(position);
+                                mPager.setCurrentItem(position, false);
+                            }
+                        });
+                        initFragments();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResultBean<TabBean>> call, Throwable t) {
+                closeProgress();
             }
         });
+
+
+    }
+
+    private void initFragments() {
+        if (mTab != null && mTabs.size() > 0) {
+            List<Fragment> fragments = new ArrayList<>();
+            for (TabBean tab : mTabs) {
+                LiveFragment fragment = new LiveFragment();
+                fragment.setType(tab.type);
+                fragments.add(fragment);
+            }
+
+            FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
+            mPager.setAdapter(adapter);
+            mPager.setOnPageChangeListener(new LazyViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    if (mAdapter != null) {
+                        mAdapter.selectItem(position);
+                    }
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+        }
     }
 
     @OnClick({R.id.left_view})
@@ -150,5 +168,25 @@ public class MainActivity extends BaseActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    class FragmentAdapter extends FragmentPagerAdapter {
+
+        private List<Fragment> fragments;
+
+        public FragmentAdapter(FragmentManager fm, List<Fragment> fs) {
+            super(fm);
+            fragments = fs;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments == null ? null : fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments == null ? 0 : fragments.size();
+        }
     }
 }

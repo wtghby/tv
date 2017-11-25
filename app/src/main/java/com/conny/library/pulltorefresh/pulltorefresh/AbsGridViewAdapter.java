@@ -356,7 +356,7 @@ public abstract class AbsGridViewAdapter<B, H> extends BaseAdapter implements
             }
         });
 
-        mGridView.setFirstLoading(false);
+//        mGridView.setFirstLoading(true);
         mGridView
                 .setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridViewWithHeaderAndFooter>() {
                     @Override
@@ -382,11 +382,19 @@ public abstract class AbsGridViewAdapter<B, H> extends BaseAdapter implements
 //		soundListener.addSoundEvent(State.REFRESHING, R.raw.refresh);
         // mGridView.setOnPullEventListener(soundListener);
         if (mGridView instanceof PullToRefreshGridView) {
-            mGridView.setMode(PullToRefreshBase.Mode.BOTH);
+            if (enable()) {
+                mGridView.setMode(PullToRefreshBase.Mode.BOTH);
+            } else {
+                mGridView.setMode(PullToRefreshBase.Mode.DISABLED);
+            }
             request();
         } else {
             mGridView.setMode(PullToRefreshBase.Mode.DISABLED);
         }
+    }
+
+    protected boolean enable() {
+        return true;
     }
 
     private void request() {

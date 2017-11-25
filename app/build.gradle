@@ -41,6 +41,12 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs', 'src/main/jniLibs']
+        }
+    }
 }
 
 greendao {
@@ -66,6 +72,9 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     //logger
     compile 'com.orhanobut:logger:2.1.1'
+    compile 'org.greenrobot:greendao:3.2.2'
 
-    compile 'org.greenrobot:greendao:3.2.2' // add library
+    compile 'com.qiniu:happy-dns:0.2.+'
+    // add library
+    implementation files('libs/pldroid-player-2.0.3.jar')
 }

@@ -8,4 +8,9 @@ import java.io.Serializable;
  */
 
 public class LiveBean implements Serializable {
+    public int id;
+    public String name;
+    public String icon;
+    public String detail;
+    public String path;
 }

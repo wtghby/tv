@@ -20,6 +20,7 @@ public class LiveFragment extends BaseFragment {
     @BindView(R.id.grid)
     PullToRefreshGridView mGrid;
 
+    private int type;
     private ListAdapter adapter;
 
     @Override
@@ -30,7 +31,11 @@ public class LiveFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        adapter = new LiveAdapter(mContext, mGrid);
+        adapter = new LiveAdapter(mContext, mGrid, type);
         mGrid.setAdapter(adapter);
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }
