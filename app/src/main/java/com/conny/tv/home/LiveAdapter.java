@@ -16,6 +16,7 @@ import com.conny.tv.api.service.LiveService;
 import com.conny.tv.bean.ResultBean;
 import com.conny.tv.material.base.BaseHolder;
 import com.conny.tv.video.PLVideoTextureActivity;
+import com.conny.tv.video.PLVideoViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;

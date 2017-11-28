@@ -29,6 +29,9 @@
             android:name="com.conny.tv.test.PullActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".video.PLVideoViewActivity"
+            android:theme="@style/AppThemeFullscreen" />
+        <activity
             android:name=".video.PLVideoTextureActivity"
             android:theme="@style/AppThemeFullscreen" />
     </application>

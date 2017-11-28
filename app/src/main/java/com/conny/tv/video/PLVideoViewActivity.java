@@ -11,82 +11,86 @@ import com.conny.tv.video.utils.Config;
 import com.conny.tv.video.widget.MediaController;
 import com.pili.pldroid.player.AVOptions;
 import com.pili.pldroid.player.PLMediaPlayer;
-import com.pili.pldroid.player.widget.PLVideoTextureView;
+import com.pili.pldroid.player.widget.PLVideoView;
 
 /**
- *  This is a demo activity of PLVideoTextureView
+ * This is a demo activity of PLVideoView
  */
-public class PLVideoTextureActivity extends VideoPlayerBaseActivity {
+public class PLVideoViewActivity extends VideoPlayerBaseActivity {
 
-    private static final String TAG = PLVideoTextureActivity.class.getSimpleName();
+    private static final String TAG = PLVideoViewActivity.class.getSimpleName();
 
-    private PLVideoTextureView mVideoView;
+    private PLVideoView mVideoView;
     private Toast mToast = null;
-    private int mRotation = 0;
-    private int mDisplayAspectRatio = PLVideoTextureView.ASPECT_RATIO_FIT_PARENT; //default
+    private int mDisplayAspectRatio = PLVideoView.ASPECT_RATIO_FIT_PARENT;
     private TextView mStatInfoTextView;
+    private MediaController mMediaController;
+
     private boolean mIsLiveStreaming;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pl_video_texture);
+        setContentView(R.layout.activity_pl_video_view);
 
         String videoPath = getIntent().getStringExtra("videoPath");
         mIsLiveStreaming = getIntent().getIntExtra("liveStreaming", 1) == 1;
 
-        mVideoView = (PLVideoTextureView) findViewById(R.id.VideoView);
+        mVideoView = (PLVideoView) findViewById(R.id.VideoView);
 
         View loadingView = findViewById(R.id.LoadingView);
         loadingView.setVisibility(View.VISIBLE);
         mVideoView.setBufferingIndicator(loadingView);
 
-        View coverView = findViewById(R.id.CoverView);
-        mVideoView.setCoverView(coverView);
+        View mCoverView = findViewById(R.id.CoverView);
+        mVideoView.setCoverView(mCoverView);
 
         mStatInfoTextView = (TextView) findViewById(R.id.StatInfoTextView);
-
-        // If you want to fix display orientation such as landscape, you can use the code show as follow
-        //
-        // if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        //     mVideoView.setPreviewOrientation(0);
-        // }
-        // else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-        //     mVideoView.setPreviewOrientation(270);
-        // }
 
         // 1 -> hw codec enable, 0 -> disable [recommended]
         int codec = getIntent().getIntExtra("mediaCodec", AVOptions.MEDIA_CODEC_SW_DECODE);
         AVOptions options = new AVOptions();
         // the unit of timeout is ms
         options.setInteger(AVOptions.KEY_PREPARE_TIMEOUT, 10 * 1000);
-        options.setInteger(AVOptions.KEY_LIVE_STREAMING, mIsLiveStreaming ? 1 : 0);
         // 1 -> hw codec enable, 0 -> disable [recommended]
         options.setInteger(AVOptions.KEY_MEDIACODEC, codec);
+        options.setInteger(AVOptions.KEY_LIVE_STREAMING, mIsLiveStreaming ? 1 : 0);
         boolean cache = getIntent().getBooleanExtra("cache", false);
         if (!mIsLiveStreaming && cache) {
             options.setString(AVOptions.KEY_CACHE_DIR, Config.DEFAULT_CACHE_DIR);
         }
+        boolean vcallback = getIntent().getBooleanExtra("video-data-callback", false);
+        if (vcallback) {
+            options.setInteger(AVOptions.KEY_VIDEO_DATA_CALLBACK, 1);
+        }
+        boolean acallback = getIntent().getBooleanExtra("audio-data-callback", false);
+        if (acallback) {
+            options.setInteger(AVOptions.KEY_AUDIO_DATA_CALLBACK, 1);
+        }
         mVideoView.setAVOptions(options);
         mVideoView.setDebugLoggingEnabled(true);
 
-        // You can mirror the display
-        // mVideoView.setMirror(true);
-
-        // You can also use a custom `MediaController` widget
-        MediaController mediaController = new MediaController(this, !mIsLiveStreaming, mIsLiveStreaming);
-        mediaController.setOnClickSpeedAdjustListener(mOnClickSpeedAdjustListener);
-        mVideoView.setMediaController(mediaController);
-
+        // Set some listeners
         mVideoView.setOnInfoListener(mOnInfoListener);
         mVideoView.setOnVideoSizeChangedListener(mOnVideoSizeChangedListener);
         mVideoView.setOnBufferingUpdateListener(mOnBufferingUpdateListener);
         mVideoView.setOnCompletionListener(mOnCompletionListener);
         mVideoView.setOnErrorListener(mOnErrorListener);
-
-        mVideoView.setLooping(getIntent().getBooleanExtra("loop", false));
+        mVideoView.setOnVideoFrameListener(mOnVideoFrameListener);
+        mVideoView.setOnAudioFrameListener(mOnAudioFrameListener);
 
         mVideoView.setVideoPath(videoPath);
+        mVideoView.setLooping(getIntent().getBooleanExtra("loop", false));
+
+        // You can also use a custom `MediaController` widget
+        mMediaController = new MediaController(this, !mIsLiveStreaming, mIsLiveStreaming);
+        mMediaController.setOnClickSpeedAdjustListener(mOnClickSpeedAdjustListener);
+        mVideoView.setMediaController(mMediaController);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mVideoView.start();
     }
 
@@ -98,39 +102,28 @@ public class PLVideoTextureActivity extends VideoPlayerBaseActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mVideoView.start();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         mVideoView.stopPlayback();
-    }
-
-    public void onClickRotate(View v) {
-        mRotation = (mRotation + 90) % 360;
-        mVideoView.setDisplayOrientation(mRotation);
     }
 
     public void onClickSwitchScreen(View v) {
         mDisplayAspectRatio = (mDisplayAspectRatio + 1) % 5;
         mVideoView.setDisplayAspectRatio(mDisplayAspectRatio);
         switch (mVideoView.getDisplayAspectRatio()) {
-            case PLVideoTextureView.ASPECT_RATIO_ORIGIN:
+            case PLVideoView.ASPECT_RATIO_ORIGIN:
                 showToastTips("Origin mode");
                 break;
-            case PLVideoTextureView.ASPECT_RATIO_FIT_PARENT:
+            case PLVideoView.ASPECT_RATIO_FIT_PARENT:
                 showToastTips("Fit parent !");
                 break;
-            case PLVideoTextureView.ASPECT_RATIO_PAVED_PARENT:
+            case PLVideoView.ASPECT_RATIO_PAVED_PARENT:
                 showToastTips("Paved parent !");
                 break;
-            case PLVideoTextureView.ASPECT_RATIO_16_9:
+            case PLVideoView.ASPECT_RATIO_16_9:
                 showToastTips("16 : 9 !");
                 break;
-            case PLVideoTextureView.ASPECT_RATIO_4_3:
+            case PLVideoView.ASPECT_RATIO_4_3:
                 showToastTips("4 : 3 !");
                 break;
             default:
@@ -148,10 +141,9 @@ public class PLVideoTextureActivity extends VideoPlayerBaseActivity {
                 case PLMediaPlayer.MEDIA_INFO_BUFFERING_END:
                     break;
                 case PLMediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:
-                    showToastTips("First video render time: " + extra + "ms");
+                    showToastTips("first video render time: " + extra + "ms");
                     break;
                 case PLMediaPlayer.MEDIA_INFO_AUDIO_RENDERING_START:
-                    Log.i(TAG, "First audio render time: " + extra + "ms");
                     break;
                 case PLMediaPlayer.MEDIA_INFO_VIDEO_FRAME_RENDERING:
                     Log.i(TAG, "video frame rendering, ts = " + extra);
@@ -170,7 +162,7 @@ public class PLVideoTextureActivity extends VideoPlayerBaseActivity {
                     break;
                 case PLMediaPlayer.MEDIA_INFO_VIDEO_BITRATE:
                 case PLMediaPlayer.MEDIA_INFO_VIDEO_FPS:
-//                    updateStatInfo();
+                    updateStatInfo();
                     break;
                 case PLMediaPlayer.MEDIA_INFO_CONNECTED:
                     Log.i(TAG, "Connected !");
@@ -191,7 +183,7 @@ public class PLVideoTextureActivity extends VideoPlayerBaseActivity {
                     /**
                      * SDK will do reconnecting automatically
                      */
-                    showToastTips("IO Error !");
+                    Log.e(TAG, "IO Error!");
                     return false;
                 case PLMediaPlayer.ERROR_CODE_OPEN_FAILED:
                     showToastTips("failed to open player !");
@@ -213,7 +205,10 @@ public class PLVideoTextureActivity extends VideoPlayerBaseActivity {
         public void onCompletion(PLMediaPlayer plMediaPlayer) {
             Log.i(TAG, "Play Completed !");
             showToastTips("Play Completed !");
-            finish();
+            if (!mIsLiveStreaming) {
+                mMediaController.refreshProgress();
+            }
+            //finish();
         }
     };
 
@@ -228,6 +223,20 @@ public class PLVideoTextureActivity extends VideoPlayerBaseActivity {
         @Override
         public void onVideoSizeChanged(PLMediaPlayer plMediaPlayer, int width, int height) {
             Log.i(TAG, "onVideoSizeChanged: width = " + width + ", height = " + height);
+        }
+    };
+
+    private PLMediaPlayer.OnVideoFrameListener mOnVideoFrameListener = new PLMediaPlayer.OnVideoFrameListener() {
+        @Override
+        public void onVideoFrameAvailable(byte[] data, int size, int width, int height, int format, long ts) {
+            Log.i(TAG, "onVideoFrameAvailable: " + size + ", " + width + " x " + height + ", " + format + ", " + ts);
+        }
+    };
+
+    private PLMediaPlayer.OnAudioFrameListener mOnAudioFrameListener = new PLMediaPlayer.OnAudioFrameListener() {
+        @Override
+        public void onAudioFrameAvailable(byte[] data, int size, int samplerate, int channels, int datawidth, long ts) {
+            Log.i(TAG, "onAudioFrameAvailable: " + size + ", " + samplerate + ", " + channels + ", " + datawidth + ", " + ts);
         }
     };
 
@@ -258,7 +267,7 @@ public class PLVideoTextureActivity extends VideoPlayerBaseActivity {
                 if (mToast != null) {
                     mToast.cancel();
                 }
-                mToast = Toast.makeText(PLVideoTextureActivity.this, tips, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(PLVideoViewActivity.this, tips, Toast.LENGTH_SHORT);
                 mToast.show();
             }
         });
