@@ -75,8 +75,6 @@ public class LiveAdapter extends AbsGridViewAdapter<LiveBean, LiveAdapter.Holder
     }
 
     class Holder extends BaseHolder {
-        @BindView(R.id.image)
-        ImageView image;
         @BindView(R.id.name)
         TextView name;
         @BindView(R.id.desc)

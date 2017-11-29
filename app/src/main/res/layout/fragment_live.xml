@@ -11,6 +11,7 @@
         android:layout_marginRight="@dimen/px20"
         android:layout_marginTop="@dimen/px20"
         android:horizontalSpacing="10dp"
+        android:listSelector="@android:color/transparent"
         android:numColumns="2"
         android:scrollbars="none"
         android:stretchMode="columnWidth"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#7307EF</color>
-    <color name="colorPrimaryDark">#7307EF</color>
-    <color name="main_color">#7307EF</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#4e71e2</color>
+    <color name="colorPrimaryDark">#4e71e2</color>
+    <color name="main_color">#4e71e2</color>
+    <color name="colorAccent">#4e71e2</color>
 
     <color name="background_app">#dedede</color>
 

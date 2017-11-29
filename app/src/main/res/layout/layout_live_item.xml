@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/p_1002"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/image"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px200"
-        android:scaleType="fitXY"
-        android:src="@mipmap/cover" />
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/px15"
-        android:text="name"
-        android:textColor="@color/black_565656"
-        android:textSize="@dimen/font_30px" />
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginRight="@dimen/px30"
+        android:background="@drawable/ic_tv">
 
-    <TextView
-        android:id="@+id/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/px5"
-        android:layout_marginLeft="@dimen/px15"
-        android:text="desc"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/font_24px" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/px64"
+            android:layout_marginTop="@dimen/px60"
+            android:textColor="@color/black_565656"
+            android:textSize="@dimen/font_30px" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/px5"
+            android:layout_marginLeft="@dimen/px15"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_24px" />
+    </FrameLayout>
+
+</FrameLayout>

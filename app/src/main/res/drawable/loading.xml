@@ -3,14 +3,26 @@
     android:oneshot="false">
     <item
         android:drawable="@mipmap/ic_loading_a"
-        android:duration="150" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/ic_loading_b"
-        android:duration="150" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/ic_loading_c"
-        android:duration="150" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/ic_loading_d"
-        android:duration="150" />
+        android:duration="100" />
+    <item
+        android:drawable="@mipmap/ic_loading_e"
+        android:duration="100" />
+    <item
+        android:drawable="@mipmap/ic_loading_f"
+        android:duration="100" />
+    <item
+        android:drawable="@mipmap/ic_loading_g"
+        android:duration="100" />
+    <item
+        android:drawable="@mipmap/ic_loading_h"
+        android:duration="100" />
 </animation-list>

@@ -197,7 +197,7 @@ public abstract class AbsGridViewAdapter<B, H> extends BaseAdapter implements
      * 创建ListItem
      */
     protected View createItem(final int position) {
-        if (mIsChoiceMode || mGridView != null) {
+        if (mIsChoiceMode && mGridView != null) {
             View templateView = LayoutInflater.from(mContext).inflate(
                     R.layout.base_list_swipe_row, null);
             LinearLayout frontView = (LinearLayout) templateView

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.conny.library.lazy.LazyViewPager;
 import com.conny.library.slidingmenu.lib.SlidingMenu;
@@ -13,6 +14,7 @@ import com.conny.tv.R;
 import com.conny.tv.api.callback.ApiCallback;
 import com.conny.tv.bean.ResultBean;
 import com.conny.tv.material.base.BaseActivity;
+import com.conny.tv.material.utils.ApkUtil;
 import com.conny.tv.material.view.HorizontalListView;
 
 import java.util.ArrayList;
@@ -33,7 +35,6 @@ public class MainActivity extends BaseActivity {
     private List<TabBean> mTabs;
 
     private SlidingMenu menu;
-    private final String PIC = "http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg";
 
     @Override
     protected void initLayout() {
@@ -46,14 +47,6 @@ public class MainActivity extends BaseActivity {
         setTitleTxt("首页");
         setLeftImage(R.mipmap.ic_person);
         initTab();
-//
-//        Fragment f1 = new LiveFragment();
-//        Fragment f2 = new LiveFragment();
-//
-//        List<Fragment> fragments = new ArrayList<>();
-//        fragments.add(f1);
-//        fragments.add(f2);
-
     }
 
     private void initTab() {
@@ -148,6 +141,9 @@ public class MainActivity extends BaseActivity {
             menu.setOffsetFadeDegree(0.25f);
             menu.setFadeDegree(0.35f);
             menu.setShadowWidth(15);
+
+            TextView versionName = (TextView) menu.findViewById(R.id.version_name);
+            versionName.setText(getString(R.string.version_name, ApkUtil.getVersionName(this)));
         }
     }
 

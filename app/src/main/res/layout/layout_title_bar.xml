@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginLeft="@dimen/px20"
         android:scaleType="centerInside" />
 
     <TextView
