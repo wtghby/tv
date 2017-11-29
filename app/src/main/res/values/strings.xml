@@ -48,6 +48,7 @@
 
     <string name="yes">是</string>
     <string name="no">否</string>
+    <string name="update">更新</string>
     <string name="cancel">取消</string>
     <string name="delete">删除</string>
     <string name="sorroy">抱歉</string>
@@ -57,4 +58,7 @@
     <string name="base_load_failed_des">失败原因可能是:\n1.本页面内容已不存在\n2.本页面加载失败\n3.您的网络异常，请检查网络</string>
     <string name="get_data_error">数据加载失败了,请检查一下网络，再重新加载</string>
     <string name="no_data">无更多数据</string>
+    <string name="update_title">发现新版本</string>
+    <string name="update_message">发现新版本：%1$s</string>
+    <string name="version_msg">最新版本：%1$s\n下载文件：%2$s</string>
 </resources>

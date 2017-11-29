@@ -6,9 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.conny.library.lazy.LazyViewPager;
 import com.conny.library.slidingmenu.lib.SlidingMenu;
 import com.conny.tv.R;
@@ -16,7 +14,6 @@ import com.conny.tv.api.callback.ApiCallback;
 import com.conny.tv.bean.ResultBean;
 import com.conny.tv.material.base.BaseActivity;
 import com.conny.tv.material.view.HorizontalListView;
-import com.conny.tv.test.LazyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +21,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
 
@@ -66,29 +61,26 @@ public class MainActivity extends BaseActivity {
         LiveApi.listTab(new ApiCallback<TabBean>() {
 
             @Override
-            public void onResponse(Call<ResultBean<TabBean>> call, Response<ResultBean<TabBean>> response) {
+            public void onSuccess(Call<ResultBean<TabBean>> call, ResultBean<TabBean> result) {
                 closeProgress();
-                if (response != null) {
-                    ResultBean<TabBean> result = response.body();
-                    if (result != null && result.errorCode == 0) {
-                        mTabs = result.rows;
-                        mAdapter = new TabAdapter(MainActivity.this, mTabs);
-                        mTab.setAdapter(mAdapter);
-                        mTab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                mAdapter.selectItem(position);
-                                mPager.setCurrentItem(position, false);
-                            }
-                        });
-                        initFragments();
-                    }
+                if (result != null) {
+                    mTabs = result.rows;
+                    mAdapter = new TabAdapter(MainActivity.this, mTabs);
+                    mTab.setAdapter(mAdapter);
+                    mTab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            mAdapter.selectItem(position);
+                            mPager.setCurrentItem(position, false);
+                        }
+                    });
+                    initFragments();
                 }
 
             }
 
             @Override
-            public void onFailure(Call<ResultBean<TabBean>> call, Throwable t) {
+            public void onFailure(Call<ResultBean<TabBean>> call, String message) {
                 closeProgress();
             }
         });
