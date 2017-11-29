@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 
 /**
  * Desc:
@@ -77,5 +78,71 @@ public class FileUtil {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    /**
+     * 转换文件大小
+     *
+     * @param fileS
+     * @return
+     */
+    public static String formatFileSize(long fileS) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fileSizeString = "";
+        String wrongSize = "0B";
+        if (fileS == 0) {
+            return wrongSize;
+        }
+        if (fileS < 1024) {
+            fileSizeString = df.format((double) fileS) + "B";
+        } else if (fileS < 1048576) {
+            fileSizeString = df.format((double) fileS / 1024) + "KB";
+        } else if (fileS < 1073741824) {
+            fileSizeString = df.format((double) fileS / 1048576) + "MB";
+        } else {
+            fileSizeString = df.format((double) fileS / 1073741824) + "GB";
+        }
+        return fileSizeString;
+    }
+
+    public static String formatDuration(long duration) {
+        long second = duration / 1000;
+
+        int hour = (int) (second / 3600);
+
+        int min = 0;
+        int sec = 0;
+        long ms = second % 3600;
+        if (ms >= 60) {
+            min = (int) (ms / 60);
+            sec = (int) (ms % 60);
+        } else {
+            sec = (int) ms;
+        }
+
+        StringBuilder time = new StringBuilder();
+
+        if (hour > 0) {
+            time.append(hour);
+        } else {
+            time.append("00");
+        }
+        time.append(':');
+
+        if (min > 0) {
+            if (min < 10) {
+                time.append('0');
+            }
+            time.append(min);
+        } else {
+            time.append("00");
+        }
+        time.append(':');
+
+        if (sec < 10) {
+            time.append('0');
+        }
+        time.append(sec);
+        return time.toString();
     }
 }

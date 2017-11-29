@@ -37,6 +37,9 @@
         <activity
             android:name=".video.PLVideoTextureActivity"
             android:theme="@style/AppThemeFullscreen" />
+        <activity
+            android:name=".local.LocalVideoActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

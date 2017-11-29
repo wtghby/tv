@@ -8,7 +8,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></LinearLayout>
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px300" />
+
+        <TextView
+            android:id="@+id/local_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px30"
+            android:drawableLeft="@mipmap/ic_video"
+            android:drawablePadding="@dimen/px10"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/px10"
+            android:paddingTop="@dimen/px10"
+            android:text="@string/local_video"
+            android:textColor="@color/black_565656"
+            android:textSize="@dimen/font_30px" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

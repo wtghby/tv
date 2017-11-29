@@ -1,5 +1,6 @@
 package com.conny.tv.home;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,6 +14,7 @@ import com.conny.library.slidingmenu.lib.SlidingMenu;
 import com.conny.tv.R;
 import com.conny.tv.api.callback.ApiCallback;
 import com.conny.tv.bean.ResultBean;
+import com.conny.tv.local.LocalVideoActivity;
 import com.conny.tv.material.base.BaseActivity;
 import com.conny.tv.material.utils.ApkUtil;
 import com.conny.tv.material.view.HorizontalListView;
@@ -144,6 +146,15 @@ public class MainActivity extends BaseActivity {
 
             TextView versionName = (TextView) menu.findViewById(R.id.version_name);
             versionName.setText(getString(R.string.version_name, ApkUtil.getVersionName(this)));
+
+            TextView local = (TextView) menu.findViewById(R.id.local_video);
+            local.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, LocalVideoActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
