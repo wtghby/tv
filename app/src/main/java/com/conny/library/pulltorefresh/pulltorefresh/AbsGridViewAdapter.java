@@ -355,8 +355,7 @@ public abstract class AbsGridViewAdapter<B, H> extends BaseAdapter implements
                 onDataItemClick(position, mBeanList.get(position));
             }
         });
-
-//        mGridView.setFirstLoading(true);
+        mGridView.setRefreshing();
         mGridView
                 .setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridViewWithHeaderAndFooter>() {
                     @Override

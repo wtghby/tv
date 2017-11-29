@@ -11,15 +11,18 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <View
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/px300" />
+            android:layout_height="@dimen/px300"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_menu_bg" />
 
         <TextView
             android:id="@+id/local_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/px30"
+            android:layout_marginTop="@dimen/px30"
             android:drawableLeft="@mipmap/ic_video"
             android:drawablePadding="@dimen/px10"
             android:gravity="center_vertical"
