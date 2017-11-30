@@ -60,6 +60,7 @@ public class LiveAdapter extends AbsGridViewAdapter<LiveBean, LiveAdapter.Holder
     protected void onDataItemClick(int position, LiveBean bean) {
         Intent intent = new Intent(mContext, VideoViewActivity.class);
         intent.putExtra("videoPath", bean.path);
+        intent.putExtra("title", bean.name);
         mContext.startActivity(intent);
     }
 

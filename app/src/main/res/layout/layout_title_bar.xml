@@ -5,20 +5,57 @@
     android:layout_height="40dp"
     android:background="@color/main_color">
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/left_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="@dimen/px20"
-        android:scaleType="centerInside" />
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true">
 
-    <TextView
-        android:id="@+id/title_view"
+        <ImageView
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px20"
+            android:layout_marginRight="@dimen/px20"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_back" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/right_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px20"
+            android:layout_marginRight="@dimen/px20"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_back"
+            android:visibility="invisible" />
+    </FrameLayout>
+
+    <com.conny.tv.material.view.MarqueeTextView
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/px10"
+        android:layout_marginRight="@dimen/px10"
+        android:layout_toLeftOf="@id/right_view"
+        android:layout_toRightOf="@id/left_view"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_48px" />
+        android:textSize="@dimen/font_40px" />
+
 </RelativeLayout>

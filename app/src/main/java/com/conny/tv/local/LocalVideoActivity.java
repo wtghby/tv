@@ -107,6 +107,7 @@ public class LocalVideoActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(LocalVideoActivity.this, VideoViewActivity.class);
                 intent.putExtra("videoPath", mAdapter.getItem(position).path);
+                intent.putExtra("title", mAdapter.getItem(position).title);
                 startActivity(intent);
             }
         });

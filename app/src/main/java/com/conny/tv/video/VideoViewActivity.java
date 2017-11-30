@@ -25,7 +25,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.conny.tv.R;
+import com.conny.tv.material.base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.MediaPlayer.OnBufferingUpdateListener;
@@ -33,7 +36,7 @@ import io.vov.vitamio.MediaPlayer.OnInfoListener;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
-public class VideoViewActivity extends Activity implements OnInfoListener, OnBufferingUpdateListener {
+public class VideoViewActivity extends BaseActivity implements OnInfoListener, OnBufferingUpdateListener {
 
     /**
      * TODO: Set the path variable to a streaming video URL or a local media file
@@ -41,22 +44,29 @@ public class VideoViewActivity extends Activity implements OnInfoListener, OnBuf
      */
     private String path/* = "ftp://ygdy8:ygdy8@yg45.dydytt.net:6038/[阳光电影www.ygdy8.com].杀破狼·贪狼.HD.720p.国语中字.mkv"*/;
     private Uri uri;
-    private VideoView mVideoView;
-    private ProgressBar pb;
-    private TextView downloadRateView, loadRateView;
+    @BindView(R.id.buffer)
+    VideoView mVideoView;
+    @BindView(R.id.probar)
+    ProgressBar pb;
+    @BindView(R.id.download_rate)
+    TextView downloadRateView;
+    @BindView(R.id.load_rate)
+    TextView loadRateView;
+    ;
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    protected void initLayout() {
         if (!LibsChecker.checkVitamioLibs(this))
             return;
-        setContentView(R.layout.videobuffer);
-        mVideoView = (VideoView) findViewById(R.id.buffer);
-        pb = (ProgressBar) findViewById(R.id.probar);
+        addView(R.layout.videobuffer);
+    }
 
-        downloadRateView = (TextView) findViewById(R.id.download_rate);
-        loadRateView = (TextView) findViewById(R.id.load_rate);
+    @Override
+    protected void initData() {
         path = getIntent().getStringExtra("videoPath");
+        String title = getIntent().getStringExtra("title");
+        setTitleTxt(title);
+        mTitle.requestFocus();
         if (path == "") {
             // Tell the user to provide a media file URL/path.
             Toast.makeText(
@@ -83,7 +93,6 @@ public class VideoViewActivity extends Activity implements OnInfoListener, OnBuf
                 }
             });
         }
-
     }
 
     @Override
@@ -118,4 +127,12 @@ public class VideoViewActivity extends Activity implements OnInfoListener, OnBuf
         loadRateView.setText(percent + "%");
     }
 
+    @OnClick({R.id.left_view})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.left_view:
+                finish();
+                break;
+        }
+    }
 }

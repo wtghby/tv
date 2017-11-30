@@ -24,11 +24,11 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
 
     @BindView(R.id.title_bar)
-    View mTitleBar;
+    protected View mTitleBar;
     @BindView(R.id.title_view)
-    TextView mTitle;
-    @BindView(R.id.left_view)
-    ImageView mLeft;
+    protected TextView mTitle;
+    @BindView(R.id.left)
+    protected ImageView mLeft;
 
     private FrameLayout mContent;
     private Unbinder mBinder;
