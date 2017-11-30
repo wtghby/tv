@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.conny.library.pulltorefresh.pulltorefresh.AbsGridViewAdapter;
@@ -15,11 +13,7 @@ import com.conny.tv.api.RetrofitManager;
 import com.conny.tv.api.service.LiveService;
 import com.conny.tv.bean.ResultBean;
 import com.conny.tv.material.base.BaseHolder;
-import com.conny.tv.video.PLVideoTextureActivity;
-import com.conny.tv.video.PLVideoViewActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.conny.tv.video.VideoViewActivity;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -64,7 +58,7 @@ public class LiveAdapter extends AbsGridViewAdapter<LiveBean, LiveAdapter.Holder
 
     @Override
     protected void onDataItemClick(int position, LiveBean bean) {
-        Intent intent = new Intent(mContext, PLVideoTextureActivity.class);
+        Intent intent = new Intent(mContext, VideoViewActivity.class);
         intent.putExtra("videoPath", bean.path);
         mContext.startActivity(intent);
     }

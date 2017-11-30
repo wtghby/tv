@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.conny.tv.R;
 import com.conny.tv.material.base.BaseActivity;
-import com.conny.tv.video.PLVideoTextureActivity;
+import com.conny.tv.video.VideoViewActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
@@ -105,7 +105,7 @@ public class LocalVideoActivity extends BaseActivity {
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(LocalVideoActivity.this, PLVideoTextureActivity.class);
+                Intent intent = new Intent(LocalVideoActivity.this, VideoViewActivity.class);
                 intent.putExtra("videoPath", mAdapter.getItem(position).path);
                 startActivity(intent);
             }

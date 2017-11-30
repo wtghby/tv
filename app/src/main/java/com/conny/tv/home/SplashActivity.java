@@ -84,6 +84,7 @@ public class SplashActivity extends BaseActivity {
                 forward();
             }
         });
+        dialog.show();
     }
 
     private void download(UpdateInfoBean info) {
@@ -101,6 +102,7 @@ public class SplashActivity extends BaseActivity {
                     ResponseBody body = response.body();
                     if (body != null) {
                         FileUtil.saveFile(body.byteStream());
+                        FileUtil.installApk(getApplicationContext());
                     }
                 }
 
@@ -116,7 +118,7 @@ public class SplashActivity extends BaseActivity {
                 dialog.updatePercent(progress, total);
                 if (done && dialog.isShowing()) {
                     dialog.dismiss();
-                    FileUtil.installApk(getApplicationContext());
+                    //FileUtil.installApk(getApplicationContext());
                 }
             }
         });

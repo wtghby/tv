@@ -21,10 +21,23 @@ import java.text.DecimalFormat;
  */
 
 public class FileUtil {
-    private static final String DOWNLOAD_PATH = Environment.getExternalStorageDirectory() + "igoo/download/";
+    private static final String DOWNLOAD_PATH = Environment.getExternalStorageDirectory() + "/igoo/download/";
 
     public static void saveFile(InputStream is) {
-        File file = new File(DOWNLOAD_PATH, "igoo.apk");
+        File dir = new File(DOWNLOAD_PATH);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        File file = new File(dir.getPath(), "igoo.apk");
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(file);
