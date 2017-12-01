@@ -2,6 +2,7 @@ package com.conny.tv.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -13,7 +14,9 @@ import com.conny.tv.api.RetrofitManager;
 import com.conny.tv.api.service.LiveService;
 import com.conny.tv.bean.ResultBean;
 import com.conny.tv.material.base.BaseHolder;
+import com.conny.tv.material.utils.VideoUtil;
 import com.conny.tv.video.VideoViewActivity;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -35,6 +38,8 @@ public class LiveAdapter extends AbsGridViewAdapter<LiveBean, LiveAdapter.Holder
     @Override
     protected void setViewContent(Holder holder, LiveBean bean, int position) {
         holder.name.setText(bean.name);
+        Bitmap bitmap = VideoUtil.getVideoThumbnail(bean.path);
+        Logger.i(bitmap.toString());
     }
 
     @Override

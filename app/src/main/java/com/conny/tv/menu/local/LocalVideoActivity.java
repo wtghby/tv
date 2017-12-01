@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.conny.tv.R;
 import com.conny.tv.material.base.BaseActivity;
+import com.conny.tv.material.utils.VideoUtil;
 import com.conny.tv.video.VideoViewActivity;
 import com.orhanobut.logger.Logger;
 
@@ -72,8 +73,8 @@ public class LocalVideoActivity extends BaseActivity {
                 String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME)); // 显示名称
                 String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA)); // 路径
                 long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.SIZE)); // 大小
-                Bitmap thumb = getVideoThumbnail(path);
-                String du = getRingDuring(path);
+                Bitmap thumb = VideoUtil.getVideoThumbnail(path);
+                String du = VideoUtil.getRingDuring(path);
 
                 VideoBean bean = new VideoBean();
                 bean.title = title;
@@ -124,17 +125,5 @@ public class LocalVideoActivity extends BaseActivity {
         });
     }
 
-    private Bitmap getVideoThumbnail(String videoPath) {
-        MediaMetadataRetriever media = new MediaMetadataRetriever();
-        media.setDataSource(videoPath);
-        Bitmap bitmap = media.getFrameAtTime();
-        return bitmap;
-    }
 
-    public static String getRingDuring(String path) {
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        mmr.setDataSource(path);
-        String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-        return duration;
-    }
 }
