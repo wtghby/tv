@@ -14,10 +14,12 @@ import com.conny.library.slidingmenu.lib.SlidingMenu;
 import com.conny.tv.R;
 import com.conny.tv.api.callback.ApiCallback;
 import com.conny.tv.bean.ResultBean;
-import com.conny.tv.local.LocalVideoActivity;
+import com.conny.tv.menu.about.SettingActivity;
+import com.conny.tv.menu.local.LocalVideoActivity;
 import com.conny.tv.material.base.BaseActivity;
 import com.conny.tv.material.utils.ApkUtil;
 import com.conny.tv.material.view.HorizontalListView;
+import com.conny.tv.menu.recommend.RecommendActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,14 +146,30 @@ public class MainActivity extends BaseActivity {
             menu.setFadeDegree(0.35f);
             menu.setShadowWidth(15);
 
-            TextView versionName = (TextView) menu.findViewById(R.id.version_name);
-            versionName.setText(getString(R.string.version_name, ApkUtil.getVersionName(this)));
 
             TextView local = (TextView) menu.findViewById(R.id.local_video);
+            TextView recommend = (TextView) menu.findViewById(R.id.recommend);
+            TextView setting = (TextView) menu.findViewById(R.id.setting);
             local.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MainActivity.this, LocalVideoActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            recommend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, RecommendActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            setting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                     startActivity(intent);
                 }
             });

@@ -73,6 +73,8 @@ dependencies {
     //logger
     compile 'com.orhanobut:logger:2.1.1'
     compile 'org.greenrobot:greendao:3.2.2'
+    //zxing
+    compile 'com.google.zxing:core:3.3.0'
     // add library
     implementation project(':vitamio-lib')
 }

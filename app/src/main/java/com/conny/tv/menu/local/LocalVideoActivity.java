@@ -1,4 +1,4 @@
-package com.conny.tv.local;
+package com.conny.tv.menu.local;
 
 import android.content.Intent;
 import android.database.Cursor;

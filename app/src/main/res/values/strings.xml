@@ -63,4 +63,8 @@
     <string name="version_msg">最新版本：%1$s\n下载文件：%2$s</string>
     <string name="version_name">版本:%1$s</string>
     <string name="local_video">本地视频</string>
+    <string name="recommend">分享app</string>
+    <string name="setting">设置</string>
+    <string name="qr_code">二维码</string>
+    <string name="qr_code_title">扫一扫二维码，即可下载APP</string>
 </resources>

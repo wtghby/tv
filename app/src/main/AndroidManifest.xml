@@ -33,11 +33,17 @@
             android:name="com.conny.tv.test.PullActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".local.LocalVideoActivity"
+            android:name=".menu.local.LocalVideoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".video.VideoViewActivity"
             android:theme="@style/AppThemeFullscreen" />
+        <activity
+            android:name=".menu.recommend.RecommendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.about.SettingActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

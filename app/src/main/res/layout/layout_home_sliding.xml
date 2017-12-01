@@ -5,62 +5,56 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="@dimen/px300"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_menu_bg" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/px300"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_menu_bg" />
-
-        <TextView
-            android:id="@+id/local_video"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/px30"
-            android:layout_marginTop="@dimen/px30"
-            android:drawableLeft="@mipmap/ic_video"
-            android:drawablePadding="@dimen/px10"
-            android:gravity="center_vertical"
-            android:paddingBottom="@dimen/px10"
-            android:paddingTop="@dimen/px10"
-            android:text="@string/local_video"
-            android:textColor="@color/black_565656"
-            android:textSize="@dimen/font_30px" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/local_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/px30"
+        android:layout_marginLeft="@dimen/px30"
         android:layout_marginTop="@dimen/px30"
-        android:orientation="vertical">
+        android:drawableLeft="@mipmap/ic_video"
+        android:drawablePadding="@dimen/px10"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/px10"
+        android:paddingTop="@dimen/px10"
+        android:text="@string/local_video"
+        android:textColor="@color/black_565656"
+        android:textSize="@dimen/font_30px" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_app" />
+    <TextView
+        android:id="@+id/recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginTop="@dimen/px30"
+        android:drawableLeft="@mipmap/ic_share"
+        android:drawablePadding="@dimen/px10"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/px10"
+        android:paddingTop="@dimen/px10"
+        android:text="@string/recommend"
+        android:textColor="@color/black_565656"
+        android:textSize="@dimen/font_30px" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/app_name"
-            android:textColor="@color/black_565656"
-            android:textSize="@dimen/font_30px" />
+    <TextView
+        android:id="@+id/setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginTop="@dimen/px30"
+        android:drawableLeft="@mipmap/ic_setting"
+        android:drawablePadding="@dimen/px10"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/px10"
+        android:paddingTop="@dimen/px10"
+        android:text="@string/setting"
+        android:textColor="@color/black_565656"
+        android:textSize="@dimen/font_30px" />
 
-        <TextView
-            android:id="@+id/version_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/px5"
-            android:textColor="@color/black_565656"
-            android:textSize="@dimen/font_30px" />
-    </LinearLayout>
 </LinearLayout>
