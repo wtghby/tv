@@ -17,11 +17,11 @@ android {
 
     signingConfigs {
         release {
-//            storeFile file(keystoreProperties['storeFile'])
-//            storePassword keystoreProperties['storePassword']
-//            keyAlias keystoreProperties['keyAlias']
-//            keyPassword keystoreProperties['keyPassword']
-//            v2SigningEnabled true
+            storeFile file("../keystore.jks")
+            storePassword "qwertyuiop"
+            keyAlias "key_store"
+            keyPassword "qwertyuiop"
+            v2SigningEnabled true
         }
         debug {
         }
@@ -39,6 +39,16 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+        }
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null) {
+                    def time = new Date().format("MMddHHmm")
+                    def fileName = outputFile.name.replace(outputFile.name, "igoo_" + time + "v_${defaultConfig.versionName}.apk")
+                    outputFileName = fileName
+                }
+            }
         }
     }
 

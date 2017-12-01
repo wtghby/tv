@@ -1,6 +1,7 @@
 package com.conny.tv.menu.recommend;
 
 import android.graphics.Bitmap;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.conny.tv.R;
@@ -15,6 +16,7 @@ import com.conny.tv.material.utils.QrCodeUtil;
 import com.conny.tv.material.utils.ResourcesUtil;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import retrofit2.Call;
 
 /**
@@ -65,5 +67,14 @@ public class RecommendActivity extends BaseActivity {
                 closeProgress();
             }
         });
+    }
+
+    @OnClick({R.id.left_view})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.left_view:
+                finish();
+                break;
+        }
     }
 }

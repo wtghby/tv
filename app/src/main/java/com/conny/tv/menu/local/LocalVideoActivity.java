@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Desc:
@@ -45,6 +46,16 @@ public class LocalVideoActivity extends BaseActivity {
         showProgress(true);
         new VideoThread().start();
     }
+
+    @OnClick({R.id.left_view})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.left_view:
+                finish();
+                break;
+        }
+    }
+
 
     class VideoThread extends Thread {
         @Override
