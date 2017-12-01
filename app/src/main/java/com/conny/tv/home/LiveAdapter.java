@@ -38,8 +38,8 @@ public class LiveAdapter extends AbsGridViewAdapter<LiveBean, LiveAdapter.Holder
     @Override
     protected void setViewContent(Holder holder, LiveBean bean, int position) {
         holder.name.setText(bean.name);
-        Bitmap bitmap = VideoUtil.getVideoThumbnail(bean.path);
-        Logger.i(bitmap.toString());
+//        Bitmap bitmap = VideoUtil.getVideoThumbnail(bean.path);
+//        Logger.i(bitmap.toString());
     }
 
     @Override
