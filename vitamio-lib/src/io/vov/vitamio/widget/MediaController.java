@@ -258,6 +258,7 @@ public class MediaController extends FrameLayout {
     mEndTime = (TextView) v.findViewById(getResources().getIdentifier("mediacontroller_time_total", "id", mContext.getPackageName()));
     mCurrentTime = (TextView) v.findViewById(getResources().getIdentifier("mediacontroller_time_current", "id", mContext.getPackageName()));
     mFileName = (TextView) v.findViewById(getResources().getIdentifier("mediacontroller_file_name", "id", mContext.getPackageName()));
+    mFileName.setVisibility(GONE);
     if (mFileName != null)
       mFileName.setText(mTitle);
   }
